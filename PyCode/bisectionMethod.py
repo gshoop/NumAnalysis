@@ -22,7 +22,6 @@ def bisect(f,a,b,tol):
 
     Test Case
     ---------
-
     '''
     #from numpy import sign
     # Check if there is a zero within the interval taking advantage of the intermediate value theorem
