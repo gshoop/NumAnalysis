@@ -1,3 +1,5 @@
+from numpy import sign
+
 def bisect(f,a,b,tol):
     '''Approximates zeros of f(x) between interval [a,b] using bisection method.
     
@@ -22,23 +24,30 @@ def bisect(f,a,b,tol):
     ---------
 
     '''
+    #from numpy import sign
     # Check if there is a zero within the interval taking advantage of the intermediate value theorem
     if f(a)*f(b) >= 0:
         print('Bisection Method Failed')
         return None
     
-    n = 1 # Used to count number of iterations
-
+    n = 0 # Used to count number of iterations
+    print('\n i |   ai   |f(ai)|   ci   |f(ci)|   bi   |f(bi)|')
+    # Loop runs while half the distance between our interval is greater than our tolerance
+    # returns our approximation when we are below the tolerance
     while (b-a)/2 > tol:
-        c = (a+b)/2
-        n += 1
-        if f(c) == 0:
+        c = (a+b)/2                 # halfway point in interval
+        print('%2d |%8.6f|%5d|%8.6f|%5d|%8.6f|%5d|' %(n,a,sign(f(a)),c,sign(f(c)),b,sign(f(b))))
+        n += 1                      # incrementing count for iterations
+        if f(c) == 0:               # we've found a zero if f(c) == 0
             print('Value found!')
             return c
-        if f(a)*f(c) < 0:
+        if f(a)*f(c) < 0:           # If true IVT says zero is between [a,c]
             a = a
-            b = c
-        else:
+            b = c                   
+        else:                       # else zero must be between [c,b]
             a = c
             b = b
-    return (a + b)/2
+    
+    c_n = (a+b)/2
+    print('\nNumber of iterations: {}'.format(n))
+    return c_n
