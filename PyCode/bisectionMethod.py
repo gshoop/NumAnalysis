@@ -31,7 +31,12 @@ def bisect(f,a,b,tol):
         return None
     
     n = 0 # Used to count number of iterations
+    
+    # Formating for table
+    # Table will show iteration number i, along with values of a, b, and c at i
+    # and the signs of a, b, and c represented with -1 or 1.
     print('\n i |   ai   |f(ai)|   ci   |f(ci)|   bi   |f(bi)|')
+    
     # Loop runs while half the distance between our interval is greater than our tolerance
     # returns our approximation when we are below the tolerance
     while (b-a)/2 > tol:
