@@ -1,4 +1,5 @@
 from numpy import sign
+from numpy import log2
 
 def bisect(f,a,b,tol):
     '''Approximates zeros of f(x) between interval [a,b] using bisection method.
@@ -29,8 +30,9 @@ def bisect(f,a,b,tol):
         print('Bisection Method Failed')
         return None
     
-    n = 0 # Used to count number of iterations
-    
+    i = 0 # Used to count number of iterations
+    n = log2((b-a)/(2*tol))
+    print('\nEstimated number of steps needed n = {}'.format(n))
     # Formating for table
     # Table will show iteration number i, along with values of a, b, and c at i
     # and the signs of a, b, and c represented with -1 or 1.
@@ -40,8 +42,8 @@ def bisect(f,a,b,tol):
     # returns our approximation when we are below the tolerance
     while (b-a)/2 > tol:
         c = (a+b)/2                 # halfway point in interval
-        print('%2d |%8.6f|%5d|%8.6f|%5d|%8.6f|%5d|' %(n,a,sign(f(a)),c,sign(f(c)),b,sign(f(b))))
-        n += 1                      # incrementing count for iterations
+        print('%2d |%8.6f|%5d|%8.6f|%5d|%8.6f|%5d|' %(i,a,sign(f(a)),c,sign(f(c)),b,sign(f(b))))
+        i += 1                      # incrementing count for iterations
         if f(c) == 0:               # we've found a zero if f(c) == 0
             print('Value found!')
             return c
@@ -53,5 +55,5 @@ def bisect(f,a,b,tol):
             b = b
     
     c_n = (a+b)/2
-    print('\nNumber of iterations: {}'.format(n))
+    print('\nNumber of iterations: {}'.format(i))
     return c_n
